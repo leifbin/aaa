@@ -1,0 +1,30 @@
+cluster.name: es-xxx  #集群名称，开启了自发现功能后，ES会按照此集群名称进行集群发现
+node.name:  node-1  # 节点名称
+path.data: /opt/data/elasticsearch
+path.logs: /opt/logs/elasticsearch
+bootstrap.memory_lock: true
+node.master: true  #指定该节点是否有资格被选举成为master节点
+node.data: true #允许该节点存储数据
+network.host: 0.0.0.0
+network.publish_host: 192.168.1.4
+http.port: 9200
+http.cors.allow-origin: "*"  # head 插件需要这打开这两个配置
+http.cors.enabled: true # head 插件需要这打开这两个配置
+http.max_content_length: 200mb  #提高向 ES 传输数据的大小上限，ES的底层实现 Lucene 处理文档的上限大小为 2GB
+network.tcp.keep_alive: true #启用TCP keep alive
+network.tcp.no_delay: true #开启TCP 无延迟设置
+transport.tcp.compress: true  #开启压缩tcp传输时的数据
+discovery.seed_hosts: ["192.168.1.4", "192.168.1.5","192.168.1.6"]
+cluster.initial_master_nodes: ["node-1", "node-2","node-3"]
+action.destructive_requires_name: false  #禁止使用通配符或_all删除索引
+cluster.routing.allocation.cluster_concurrent_rebalance: 8 #集群内同时启动的数据任务个数，默认是 2 个，跟内核数量一致即可
+cluster.routing.allocation.node_concurrent_recoveries: 8 #添加或删除节点及负载均衡时并发恢复的线程个数，默认 4 个，跟内核数量一致即可
+cluster.routing.allocation.node_initial_primaries_recoveries: 8 #初始化数据恢复时，并发恢复线程的个数，默认 4 个，跟内核数量一致即可
+
+#xpack的配置
+xpack.security.enabled: true
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: certificate
+xpack.security.transport.ssl.client_authentication: required
+xpack.security.transport.ssl.keystore.path: elastic-certificates.p12
+xpack.security.transport.ssl.truststore.path: elastic-certificates.p12
