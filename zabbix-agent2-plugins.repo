@@ -1,0 +1,6 @@
+[zabbix-agent2-plugins]
+name=Zabbix Official Repository (Agent2 Plugins) - $basearch
+baseurl=https://repo.zabbix.com/zabbix-agent2-plugins/1/rhel/7/$basearch/
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+gpgcheck=1
